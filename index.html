@@ -1,1 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ghost Echo Safe Box</title>
 
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#061329;
+  color:#fff;
+  min-height:100vh;
+}
+
+button,input,textarea,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+:root{
+  --navy:#061329;
+  --navy2:#0b1d3b;
+  --gold:#e8b83f;
+  --gold2:#ffd96a;
+  --text:#fff;
+  --muted:#aebbd0;
+  --line:rgba(232,184,63,.25);
+  --green:#20bd68;
+  --red:#e0525a;
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#040d1e;
+  border-bottom:1px solid var(--line);
+  padding:12px 4%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo{
+  width:48px;
+  height:48px;
+  border:2px solid var(--gold);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:20px;
+  font-weight:900;
+  background:linear-gradient(145deg,#14294c,#050d1c);
+}
+
+.brand h2{
+  color:var(--gold);
+  font-size:16px;
+}
+
+.brand small{
+  color:#aebbd0;
+  font-size:9px;
+}
+
+nav{
+  display:flex;
+  gap:5px;
+}
+
+nav button{
+  background:transparent;
+  color:#fff;
+  border:0;
+  padding:10px 12px;
+  border-radius:8px;
+}
+
+nav button:hover{
+  background:#112b55;
+  color:var(--gold2);
+}
+
+.menu{
+  display:none;
+  background:none;
+  border:0;
+  color:white;
+  font-size:27px;
+}
+
+/* GENERAL */
+
+main{
+  width:92%;
+  max-width:1200px;
+  margin:auto;
+  padding:25px 0 60px;
+}
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.gold{
+  color:var(--gold);
+}
+
+.btn{
+  padding:12px 18px;
+  border:0;
+  border-radius:9px;
+  font-weight:bold;
+}
+
+.gold-btn{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#071329;
+}
+
+.dark-btn{
+  background:#10284e;
+  border:1px solid #29466f;
+  color:white;
+}
+
+.red-btn{
+  background:var(--red);
+  color:white;
+}
+
+/* HERO */
+
+.hero{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+  align-items:center;
+  min-height:550px;
+}
+
+.hero h1{
+  font-size:clamp(40px,6vw,70px);
+  line-height:1;
+  margin-bottom:18px;
+}
+
+.hero h1 span{
+  color:var(--gold);
+}
+
+.hero p{
+  color:var(--muted);
+  line-height:1.7;
+  margin-bottom:22px;
+}
+
+.buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* SAFE ART */
+
+.safe-picture{
+  background:linear-gradient(145deg,#07172f,#10284d);
+  border:2px solid var(--gold);
+  border-radius:20px;
+  padding:35px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.4);
+}
+
+.shield{
+  width:105px;
+  height:120px;
+  margin:auto;
+  background:linear-gradient(145deg,#101f3b,#030a16);
+  border:5px solid var(--gold);
+  clip-path:polygon(50% 0,95% 17%,88% 68%,50% 100%,12% 68%,5% 17%);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gold);
+  font-size:30px;
+  font-weight:900;
+}
+
+.safe-picture h2{
+  color:white;
+  font-size:30px;
+  margin-top:15px;
+}
+
+.safe-picture h3{
+  color:var(--gold);
+  font-size:42px;
+  margin:5px 0;
+}
+
+.safe-picture p{
+  color:white;
+  font-weight:bold;
+}
+
+.safe{
+  margin:25px auto 0;
+  width:190px;
+  height:190px;
+  border-radius:15px;
+  background:linear-gradient(145deg,#253b5c,#071329);
+  border:4px solid #8998ad;
+  position:relative;
+}
+
+.safe:before{
+  content:"";
+  position:absolute;
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  border:8px solid var(--gold);
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+.safe:after{
+  content:"GE";
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  color:var(--gold);
+  font-weight:bold;
+}
+
+/* CARDS */
+
+.title{
+  text-align:center;
+  margin:30px 0;
+}
+
+.title h2{
+  font-size:32px;
+}
+
+.title p{
+  color:var(--muted);
+  margin-top:7px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+}
+
+.card{
+  background:linear-gradient(145deg,#0d2245,#08162d);
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:22px;
+}
+
+.card .icon{
+  font-size:30px;
+  margin-bottom:12px;
+}
+
+.card h3{
+  color:var(--gold);
+  margin-bottom:8px;
+}
+
+.card p{
+  color:var(--muted);
+  line-height:1.55;
+  font-size:14px;
+}
+
+/* DASHBOARD */
+
+.dashboard-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:20px;
+}
+
+.dashboard-head h1{
+  font-size:32px;
+}
+
+.dashboard-head p{
+  color:var(--muted);
+  margin-top:5px;
+}
+
+.balance-card{
+  background:linear-gradient(135deg,#123363,#07152f);
+  border:1px solid var(--gold);
+  border-radius:18px;
+  padding:28px;
+}
+
+.balance-label{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.balance{
+  color:var(--gold2);
+  font-size:45px;
+  font-weight:900;
+  margin:8px 0;
+}
+
+.account{
+  color:#dce4ef;
+  font-size:13px;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin:18px 0;
+}
+
+.action{
+  background:#0c2042;
+  border:1px solid #203c66;
+  border-radius:13px;
+  padding:20px;
+}
+
+.action-icon{
+  font-size:28px;
+}
+
+.action h3{
+  margin:8px 0;
+}
+
+.action p{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:14px;
+}
+
+.panels{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.panel{
+  background:#0c2042;
+  border:1px solid #203c66;
+  border-radius:15px;
+  padding:20px;
+}
+
+.panel h3{
+  color:var(--gold);
+  margin-bottom:12px;
+}
+
+.panel p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* FORMS */
+
+.form{
+  max-width:650px;
+  margin:25px auto;
+  background:#0c2042;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:28px;
+}
+
+.form h2{
+  color:var(--gold);
+  margin-bottom:18px;
+}
+
+.group{
+  margin-bottom:15px;
+}
+
+.group label{
+  display:block;
+  color:#dce4ef;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.group input,
+.group select,
+.group textarea{
+  width:100%;
+  padding:13px;
+  background:#07152f;
+  border:1px solid #30496f;
+  border-radius:8px;
+  color:white;
+  outline:none;
+}
+
+.group textarea{
+  min-height:110px;
+}
+
+.notice{
+  background:#07152f;
+  border:1px solid var(--gold);
+  border-radius:10px;
+  padding:15px;
+  color:#dce4ef;
+  line-height:1.6;
+  margin-bottom:18px;
+}
+
+.notice b{
+  color:var(--gold2);
+}
+
+/* TABLE */
+
+.table{
+  overflow:auto;
+  background:#0c2042;
+  border:1px solid #203c66;
+  border-radius:15px;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:650px;
+}
+
+th,td{
+  padding:14px;
+  border-bottom:1px solid #1d3558;
+  text-align:left;
+}
+
+th{
+  color:var(--gold);
+}
+
+td{
+  color:#dce4ef;
+}
+
+.status{
+  background:#263f67;
+  border-radius:20px;
+  padding:5px 9px;
+  font-size:11px;
+}
+
+/* PROFILE */
+
+.profile{
+  max-width:700px;
+  margin:auto;
+  background:#0c2042;
+  border:1px solid #203c66;
+  border-radius:16px;
+  padding:28px;
+}
+
+.profile-logo{
+  width:90px;
+  height:90px;
+  border:3px solid var(--gold);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 20px;
+  color:var(--gold);
+  font-size:28px;
+  font-weight:bold;
+}
+
+.profile-row{
+  display:flex;
+  justify-content:space-between;
+  padding:15px 0;
+  border-bottom:1px solid #203c66;
+}
+
+.profile-row span:first-child{
+  color:var(--muted);
+}
+
+/* MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  z-index:500;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:450px;
+  background:#0c2042;
+  border:1px solid var(--gold);
+  border-radius:16px;
+  padding:28px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  right:15px;
+  top:8px;
+  background:none;
+  border:0;
+  color:white;
+  font-size:28px;
+}
+
+/* FOOTER */
+
+footer{
+  background:#030a17;
+  border-top:1px solid var(--line);
+  padding:35px;
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+}
+
+footer b{
+  color:var(--gold);
+  font-size:17px;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+
+  .hero{
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .cards{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actions{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .panels{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+
+  nav{
+    display:none;
+    position:absolute;
+    top:72px;
+    left:0;
+    right:0;
+    background:#061329;
+    flex-direction:column;
+    padding:10px;
+  }
+
+  nav.open{
+    display:flex;
+  }
+
+  nav button{
+    text-align:left;
+  }
+
+  .menu{
+    display:block;
+  }
+
+  .cards,
+  .actions{
+    grid-template-columns:1fr;
+  }
+
+  .dashboard-head{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:12px;
+  }
+
+  .balance{
+    font-size:34px;
+  }
+
+  .profile-row{
+    flex-direction:column;
+    gap:5px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+  <div class="brand">
+
+    <div class="logo">GE</div>
+
+    <div>
+      <h2>GHOST ECHO SAFE BOX</h2>
+      <small>SAVE SMART. BORROW WISELY. BUILD YOUR FUTURE.</small>
+    </div>
+
+  </div>
+
+  <nav id="nav">
+
+    <button onclick="showPage('home')">Home</button>
+
+    <button onclick="showPage('save')">Save Box</button>
+
+    <button onclick="showPage('deposit')">Deposit</button>
+
+    <button onclick="showPage('withdraw')">Withdraw</button>
+
+    <button onclick="showPage('loans')">Loans</button>
+
+    <button onclick="showPage('profile')">My Profile</button>
+
+  </nav>
+
+  <button class="menu"
+          onclick="document.getElementById('nav').classList.toggle('open')">
+    ☰
+  </button>
+
+</header>
+
+
+<main>
+
+
+<!-- HOME -->
+
+<section id="home" class="page active">
+
+  <div class="hero">
+
+    <div>
+
+      <h1>
+        Ghost Echo
+        <span>Safe Box</span>
+      </h1>
+
+      <p>
+        SAVE SMART. BORROW WISELY. BUILD YOUR FUTURE.
+        Manage your savings, deposits, withdrawals and loan
+        requests from one secure-looking dashboard.
+      </p>
+
+      <div class="buttons">
+
+        <button class="btn gold-btn"
+                onclick="openAuth('register')">
+          Create Account
+        </button>
+
+        <button class="btn dark-btn"
+                onclick="openAuth('login')">
+          Login
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <div class="safe-picture">
+
+      <div class="shield">
+        GE
+      </div>
+
+      <h2>GHOST ECHO</h2>
+
+      <h3>SAFE BOX</h3>
+
+      <p>YOUR MONEY IS SAFE WITH US</p>
+
+      <div class="safe"></div>
+
+    </div>
+
+  </div>
+
+
+  <div class="title">
+
+    <h2>Our Services</h2>
+
+    <p>
+      Save smart. Borrow wisely. Build your future.
+    </p>
+
+  </div>
+
+
+  <div class="cards">
+
+    <div class="card">
+
+      <div class="icon">🔐</div>
+
+      <h3>Safe Savings</h3>
+
+      <p>
+        Secure savings management and clear wallet information.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">💵</div>
+
+      <h3>Deposits</h3>
+
+      <p>
+        Submit deposits and keep your transaction references.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">💳</div>
+
+      <h3>Reliable Loans</h3>
+
+      <p>
+        Submit loan applications and monitor their status.
+      </p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="icon">📊</div>
+
+      <h3>Grow & Achieve</h3>
+
+      <p>
+        Monitor your financial activity and savings progress.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- SAVE BOX -->
+
+<section id="save" class="page">
+
+  <div class="dashboard-head">
+
+    <div>
+
+      <h1>
+        My <span class="gold">Safe Box</span>
+      </h1>
+
+      <p>
+        Your wallet and account overview.
+      </p>
+
+    </div>
+
+    <button class="btn gold-btn"
+            onclick="openAuth('login')">
+      Login / Register
+    </button>
+
+  </div>
+
+
+  <div class="balance-card">
+
+    <div class="balance-label">
+      WALLET AMOUNT
+    </div>
+
+    <div class="balance"
+         id="balance">
+      ₦0.00
+    </div>
+
+    <div class="account">
+
+      Ghost Echo Account Number:
+      <b id="accountNumber">
+        Not logged in
+      </b>
+
+    </div>
+
+  </div>
+
+
+  <div class="actions">
+
+    <div class="action">
+
+      <div class="action-icon">💵</div>
+
+      <h3>Deposit</h3>
+
+      <p>
+        Submit money deposited to your account.
+      </p>
+
+      <button class="btn gold-btn"
+              onclick="showPage('deposit')">
+        Deposit
+      </button>
+
+    </div>
+
+
+    <div class="action">
+
+      <div class="action-icon">💸</div>
+
+      <h3>Withdraw</h3>
+
+      <p>
+        Request a withdrawal.
+      </p>
+
+      <button class="btn dark-btn"
+              onclick="showPage('withdraw')">
+        Withdraw
+      </button>
+
+    </div>
+
+
+    <div class="action">
+
+      <div class="action-icon">📜</div>
+
+      <h3>Transactions</h3>
+
+      <p>
+        See your transaction history.
+      </p>
+
+      <button class="btn dark-btn"
+              onclick="showPage('transactions')">
+        History
+      </button>
+
+    </div>
+
+
+    <div class="action">
+
+      <div class="action-icon">🏦</div>
+
+      <h3>Loans</h3>
+
+      <p>
+        Apply for a loan.
+      </p>
+
+      <button class="btn dark-btn"
+              onclick="showPage('loans')">
+        Loans
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="panels">
+
+    <div class="panel">
+
+      <h3>Account Summary</h3>
+
+      <p>
+        Account status:
+        <b id="accountStatus">
+          Not logged in
+        </b>
+      </p>
+
+      <br>
+
+      <p>
+        Currency:
+        <b>NGN</b>
+      </p>
+
+      <br>
+
+      <p>
+        Transactions:
+        <b id="transactionCount">
+          0
+        </b>
+      </p>
+
+    </div>
+
+
+    <div class="panel">
+
+      <h3>Ghost Echo Safe Box</h3>
+
+      <p>
+        This is currently a website prototype.
+        Real customer money must only be credited after
+        proper payment verification through a secure backend.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- DEPOSIT -->
+
+<section id="deposit" class="page">
+
+  <div class="form">
+
+    <h2>💵 Deposit Money</h2>
+
+    <div class="notice">
+
+      <b>Deposit Account</b>
+
+      <br><br>
+
+      <strong>
+        07016455624
+      </strong>
+
+      <br>
+
+      SmartCash PSB
+
+      <br><br>
+
+      After making a transfer, enter your amount and
+      transaction reference below.
+
+    </div>
+
+
+    <div class="group">
+
+      <label>
+        Amount (₦)
+      </label>
+
+      <input id="depositAmount"
+             type="number"
+             placeholder="Enter amount">
+
+    </div>
+
+
+    <div class="group">
+
+      <label>
+        Transaction Reference
+      </label>
+
+      <input id="depositReference"
+             placeholder="Enter transaction reference">
+
+    </div>
+
+
+    <button class="btn gold-btn"
+            onclick="deposit()">
+
+      Submit Deposit
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- WITHDRAW -->
+
+<section id="withdraw" class="page">
+
+  <div class="form">
+
+    <h2>💸 Withdraw Money</h2>
+
+
+    <div class="group">
+
+      <label>
+        Amount (₦)
+      </label>
+
+      <input id="withdrawAmount"
+             type="number"
+             placeholder="Enter amount">
+
+    </div>
+
+
+    <div class="group">
+
+      <label>
+        Bank Name
+      </label>
+
+      <input id="bankName"
+             placeholder="Enter bank name">
+
+    </div>
+
+
+    <div class="group">
+
+      <label>
+        Account Number
+      </label>
+
+      <input id="bankAccount"
+             placeholder="Enter account number">
+
+    </div>
+
+
+    <div class="group">
+
+      <label>
+        Account Name
+      </label>
+
+      <input id="bankAccountName"
+             placeholder="Enter account name">
+
+    </div>
+
+
+    <button class="btn gold-btn"
+            onclick="withdraw()">
+
+      Request Withdrawal
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- TRANSACTIONS -->
+
+<section id="transactions" class="page">
+
+  <div class="title">
+
+    <h2>
+      Transaction
+      <span class="gold">
+        History
+      </span>
+    </h2>
+
+    <p>
+      Your Safe Box activity.
+    </p>
+
+  </div>
+
+
+  <div class="table">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Date
+          </th>
+
+          <th>
+            Type
+          </th>
+
+          <th>
+            Amount
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Reference
+          </th>
+
+        </tr>
+
+      </thead>
+
+
+      <tbody id="transactionTable">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+
+<!-- LOANS -->
+
+<section id="loans" class="page">
+
+  <div class="form">
+
+    <h2>
+      🏦 Ghost Echo Loan Application
+    </h2>
+
+
+    <div class="group">
+
+      <label>
+        Loan Amount (₦)
+      </label>
+
+      <input id="loanAmount"
+             type="number"
+             placeholder="Enter amount">
+
+    </div>
+
+
+    <div class="group">
+
+      <label>
+        Purpose of Loan
+      </label>
+
+      <textarea id="loanPurpose"
+                placeholder="Explain the purpose of the loan">
+      </textarea>
+
+    </div>
+
+
+    <button class="btn gold-btn"
+            onclick="applyLoan()">
+
+      Submit Loan Request
+
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- PROFILE -->
+
+<section id="profile" class="page">
+
+  <div class="profile">
+
+    <div class="profile-logo">
+      GE
+    </div>
+
+
+    <div class="profile-row">
+
+      <span>
+        Full Name
+      </span>
+
+      <b id="profileName">
+        Not registered
+      </b>
+
+    </div>
+
+
+    <div class="profile-row">
+
+      <span>
+        Email
+      </span>
+
+      <b id="profileEmail">
+        Not registered
+      </b>
+
+    </div>
+
+
+    <div class="profile-row">
+
+      <span>
+        Phone
+      </span>
+
+      <b id="profilePhone">
+        Not registered
+      </b>
+
+    </div>
+
+
+    <div class="profile-row">
+
+      <span>
+        Account Number
+      </span>
+
+      <b id="profileAccount">
+        Not registered
+      </b>
+
+    </div>
+
+
+    <br>
+
+    <button class="btn red-btn"
+            onclick="logout()">
+
+      Logout
+
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+
+<footer>
+
+  <b>
+    GHOST ECHO SAFE BOX
+  </b>
+
+  <br><br>
+
+  SAVE SMART. BORROW WISELY. BUILD YOUR FUTURE.
+
+  <br><br>
+
+  Your Trust, Our Priority.
+
+</footer>
+
+
+
+<!-- LOGIN / REGISTER -->
+
+<div class="modal"
+     id="authModal">
+
+  <div class="modal-box">
+
+    <button class="close"
+            onclick="closeAuth()">
+      ×
+    </button>
+
+
+    <!-- LOGIN -->
+
+    <div id="loginBox">
+
+      <h2 class="gold">
+        Welcome Back
+      </h2>
+
+      <br>
+
+
+      <div class="group">
+
+        <label>
+          Gmail / Email
+        </label>
+
+        <input id="loginEmail"
+               type="email">
+
+      </div>
+
+
+      <div class="group">
+
+        <label>
+          Password
+        </label>
+
+        <input id="loginPassword"
+               type="password">
+
+      </div>
+
+
+      <button class="btn gold-btn"
+              onclick="login()">
+
+        Login
+
+      </button>
+
+
+      <p style="margin-top:18px;color:#aaa">
+
+        Don't have an account?
+
+        <button
+          onclick="openAuth('register')"
+          style="border:0;background:none;color:#e8b83f">
+
+          Register
+
+        </button>
+
+      </p>
+
+    </div>
+
+
+
+    <!-- REGISTER -->
+
+    <div id="registerBox"
+         style="display:none">
+
+      <h2 class="gold">
+        Create Account
+      </h2>
+
+      <br>
+
+
+      <div class="group">
+
+        <label>
+          Full Name
+        </label>
+
+        <input id="registerName">
+
+      </div>
+
+
+      <div class="group">
+
+        <label>
+          Gmail / Email
+        </label>
+
+        <input id="registerEmail"
+               type="email">
+
+      </div>
+
+
+      <div class="group">
+
+        <label>
+          Phone Number
+        </label>
+
+        <input id="registerPhone"
+               type="tel">
+
+      </div>
+
+
+      <div class="group">
+
+        <label>
+          Password
+        </label>
+
+        <input id="registerPassword"
+               type="password">
+
+      </div>
+
+
+      <button class="btn gold-btn"
+              onclick="register()">
+
+        Create Account
+
+      </button>
+
+
+      <p style="margin-top:18px;color:#aaa">
+
+        Already have an account?
+
+        <button
+          onclick="openAuth('login')"
+          
